@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveDay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: black;
+        }
+
+        #bear {
+            position: absolute;
+            left: 10px;
+            bottom: 50px;
+            width: 110px;
+            z-index: 2;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        #bear:hover {
+            transform: scale(1.2);
+        }
+
+        #overlayCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #portrait-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            color: white;
+            font-size: 24px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            padding: 20px;
+            flex-direction: column;
+            display: flex;
+        }
+
+        .rotate-icon {
+            width: 80px;
+            font-size: 48px;
+            animation: rotateHint 1.2s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        /* Animation hiệu ứng xoay ngang nhẹ */
+        @keyframes rotateHint {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(20deg);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+
+            75% {
+                transform: rotate(-20deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        #playMusicBtn:hover {
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+
+        #playMusicBtn i {
+            color: #cccccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="portrait-warning" style="display: none;">
+        <img class="rotate-icon" src="./assets/123.png" alt="Rotate icon">
+        Vui lòng xoay ngang thiết bị để xem nội dung 🎉
+    </div>
+
+    <img id="bear" src="./assets/anh321.gif" alt="Bear">
+
+    <canvas id="overlayCanvas"></canvas>
+
+    <button id="playMusicBtn"
+        style="display: none; position: fixed; top: 20px; right: 20px; font-size: 20px; background: transparent; border: none; cursor: pointer; z-index: 9999;">
+        <i class="fa-solid fa-volume-xmark"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+       const _0x176b05=_0x31c3;(function(_0x2fd1c6,_0xe45b1a){const _0x40c37c=_0x31c3,_0x43e91f=_0x2fd1c6();while(!![]){try{const _0x47d30a=parseInt(_0x40c37c(0x1dd))/0x1*(parseInt(_0x40c37c(0x1d4))/0x2)+-parseInt(_0x40c37c(0x1cc))/0x3+-parseInt(_0x40c37c(0x1e1))/0x4*(-parseInt(_0x40c37c(0x1e3))/0x5)+-parseInt(_0x40c37c(0x1de))/0x6*(-parseInt(_0x40c37c(0x1e7))/0x7)+parseInt(_0x40c37c(0x1e4))/0x8*(-parseInt(_0x40c37c(0x1e0))/0x9)+parseInt(_0x40c37c(0x1d8))/0xa+parseInt(_0x40c37c(0x1d2))/0xb*(parseInt(_0x40c37c(0x1df))/0xc);if(_0x47d30a===_0xe45b1a)break;else _0x43e91f['push'](_0x43e91f['shift']());}catch(_0xfc9391){_0x43e91f['push'](_0x43e91f['shift']());}}}(_0x5740,0x4c4c8),(document['addEventListener'](_0x176b05(0x1ce),function(_0xa3e0b3){_0xa3e0b3['preventDefault']();}),fetch(_0x176b05(0x1db))[_0x176b05(0x1dc)](_0x5519f4=>_0x5519f4[_0x176b05(0x1cf)]())['then'](_0x124cd9=>{const _0x2c9dd5=_0x176b05,_0x303cd6=new Blob([_0x124cd9],{'type':_0x2c9dd5(0x1e6)}),_0x1ddc11=URL[_0x2c9dd5(0x1d7)](_0x303cd6),_0x58c734=document[_0x2c9dd5(0x1d1)](_0x2c9dd5(0x1d0));_0x58c734[_0x2c9dd5(0x1e5)]=_0x1ddc11,document[_0x2c9dd5(0x1d5)]['appendChild'](_0x58c734);})));const official=_0x176b05(0x1cd),current=window[_0x176b05(0x1e2)][_0x176b05(0x1d9)];if(current!==official){document[_0x176b05(0x1d5)]['innerHTML']='';const e=document['createElement'](_0x176b05(0x1d6)),t=document[_0x176b05(0x1d1)](_0x176b05(0x1d6));t[_0x176b05(0x1d3)]='\x20',e[_0x176b05(0x1da)](t),document[_0x176b05(0x1d5)][_0x176b05(0x1da)](e);}function _0x31c3(_0x34ba78,_0x44ee79){const _0x57403c=_0x5740();return _0x31c3=function(_0x31c3e1,_0x221e33){_0x31c3e1=_0x31c3e1-0x1cc;let _0x3057b0=_0x57403c[_0x31c3e1];return _0x3057b0;},_0x31c3(_0x34ba78,_0x44ee79);}function _0x5740(){const _0x28810a=['2CHVnZU','1812GVvYJk','12AmVWqE','144ZPaPqv','60MXxjLI','location','73035NBLpdB','190864gkhIrb','src','application/javascript','5166wTuBwN','996888mTDJwX','panbap.github.io','contextmenu','text','script','createElement','65439ktPrTp','innerText','3246HfgZZr','body','div','createObjectURL','5753680tRghsA','hostname','appendChild','./assets/taochu.js','then'];_0x5740=function(){return _0x28810a;};return _0x5740();}
+    </script>
+
+</body>
+
+</html>
